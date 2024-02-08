@@ -2,18 +2,36 @@ import React, { useRef } from 'react'
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 import { Environment, Stats, OrbitControls, } from '@react-three/drei'
 
-
+// load mesh in side left
 
 export default function Scene() {
-    return <Canvas dpr={[1, 2]} camera={{ fov: 75 }} >
+    const cameraRef = useRef()
+    return <Canvas
+        dpr={[1, 2]}
+        camera={{ position: [-120, 0, 20], fov: 95 }}
+        shadows
+        gl={{ antialias: true, toneMapping: 'ReinhardToneMapping', gammaOutput: true }}
+    >
         <Environment files={'/hall.hdr'} background />
         <directionalLight position={[3.3, 1.0, 4.4]} intensity={4} />
-        <OrbitControls target={[0, 1, 0]} autoRotate />
+        {/* <OrbitControls target={[0, 1, 0]} /> */}
+        <OrbitControls
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}
+                zoomSpeed={0.5}
+                panSpeed={0.5}
+                rotateSpeed={0.5}
+                target={[0, 0, 0]}
+                args={[cameraRef.current]}
+            />
         {/* <axesHelper args={[5]} /> */}
         <Stats />
         {/* <RotatingCube /> */}
-        
-    
+
+
+
+
 
     </Canvas>
 
