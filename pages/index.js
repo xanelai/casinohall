@@ -12,7 +12,7 @@ export default function Home() {
   const [envMap, setEnvMap] = useState(null);
   useEffect(() => {
     const loadEnvMap = async () => {
-      const map = await new CubeTextureLoader().loadAsync(['/sample_1280×853.hdr']);
+      const map = await new CubeTextureLoader().loadAsync(['/large_corridor_4k.hdr']);
       setEnvMap(map);
     };
     loadEnvMap();
