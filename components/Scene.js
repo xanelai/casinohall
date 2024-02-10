@@ -1,23 +1,25 @@
-import React, { useRef } from 'react'
-import { Canvas, useLoader, useFrame } from '@react-three/fiber';
+import React, { useRef, Suspense, useEffect } from 'react'
+import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 import { Environment, Stats, OrbitControls, } from '@react-three/drei'
 
-// load mesh in side left
+
+
 
 export default function Scene() {
-    const cameraRef = useRef()
     return <Canvas
         dpr={[1, 2]}
-        camera={{ position: [-120, 0, 20], fov: 95 }}
+        camera={{  fov: 95, near: 0.1, far: 1000}}
         shadows
         gl={{ antialias: true, toneMapping: 'ReinhardToneMapping', gammaOutput: true }}
     >
-        <Environment files={'/hall.hdr'} background />
+        <Environment files={'/hall2.hdr'} background />
         <directionalLight position={[3.3, 1.0, 4.4]} intensity={4} />
-        <OrbitControls target={[0, 1, 0]} />
+        <OrbitControls />
+
         {/* <axesHelper args={[5]} /> */}
         <Stats />
-        {/* <RotatingCube /> */}
+        <RotatingCube />
+
 
 
 
@@ -31,13 +33,9 @@ export default function Scene() {
 function RotatingCube() {
     const cubeRef = useRef();
 
-    useFrame(() => {
-        // Rotar el cubo en el eje Y
-        cubeRef.current.rotation.y += 0.01;
-    });
 
     return (
-        <mesh ref={cubeRef} position={[0, 0, 0]}>
+        <mesh ref={cubeRef} position={[0, 0, 10]}>
             <boxGeometry args={[1, 1, 1]} />
             <meshBasicMaterial color="red" />
         </mesh>
