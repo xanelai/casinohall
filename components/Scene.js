@@ -1,6 +1,6 @@
 import React, { useRef, Suspense, useEffect } from 'react'
-import { Canvas, useLoader, useFrame, useThree, } from '@react-three/fiber';
-import { Environment, Stats, OrbitControls, Plane, SpotLight } from '@react-three/drei'
+import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
+import { Environment, Stats, OrbitControls, Plane, SpotLight, Html } from '@react-three/drei'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 
 
@@ -80,7 +80,7 @@ export default function Scene() {
     >
         <perspectiveCamera ref={cameraRef} position={[0, 0, 5]} />
 
- 
+
         <directionalLight position={[0, 4, 5]} intensity={6} castShadow />
 
         <ModeloFBX position={[0, 0, 0]} />
@@ -94,13 +94,20 @@ export default function Scene() {
         </Plane>
 
         <CarpetBX position={[-30, 0, 20]} />
-        
+
         <SpotLight position={[2, 10, 0]} intensity={60} angle={Math.PI / 5} penumbra={70} />
         <SpotLight position={[0, 10, 0]} intensity={60} angle={Math.PI / 5} penumbra={0} />
         <SpotLight position={[-2, 10, 0]} intensity={500} angle={Math.PI / 5} penumbra={0} />
         <Wall position={[0, 5, -2.5]} />
 
         <OrbitControls />
+
+        <Html position={[-6, 4, -3]} rotation={[0, Math.PI / 4, 0]}>
+            <div style={{ width: '800px', height: '500px' }}>
+                <iframe title="iframe1" src="https://xanel.app" style={{ width: '100%', height: '100%' }} />
+            </div>
+        </Html>
+
 
 
 
